@@ -159,6 +159,7 @@ def _get_state(hash_funcs=None):
     return session._custom_session_state
 
 
+
 def FWPercentile(state):
     df = load_data()
 
@@ -223,7 +224,7 @@ def FWPercentile(state):
     df['Recoveries/90'] = df['Recoveries/90'].rank(pct=True)
 
 
-    player = st.sidebar.multiselect('Select Player', natsorted(df.Player.unique()))
+    player = st.sidebar.selectbox('Select Player', natsorted(df.Player.unique()))
 
     FW = pd.DataFrame(data=df,
                       columns=['Team', 'Player', 'Position', 'Nationality', 'NPGoals/90', 'xG/90', 'Shots/90', 'Shot%',
@@ -241,7 +242,7 @@ def FWPercentile(state):
     D = pd.DataFrame(data=df, columns=['Team', 'Player', 'Position', 'Nationality', 'Passes/90', 'Pass%', 'Dribble%',
                                        'Recoveries/90', 'TackInt/90', 'Tackle%',
                                        'AerialsWon/90', 'Aerial%', 'D2LostBalls/90'])
-    FW = FW[FW['Player'].isin(player)]
+    FW = FW[FW['Player'] == (player)]
     test = FW[FW['Player'] == player]
     test = test.drop(columns=['Team', 'Position', 'Nationality'])
     test = test.set_index('Player')
@@ -259,7 +260,7 @@ def FWPercentile(state):
     plt.title(str(player) + '\nForwards Percentile Chart', weight='bold',size=24)
     st.pyplot(plt)
 
-    playerdf = totaldf[totaldf['Player'].isin(player)]
+    playerdf = totaldf[totaldf['Player'] == (player)]
     st.dataframe(playerdf)
 
 def AMPercentile(state):
@@ -326,7 +327,7 @@ def AMPercentile(state):
     df['Recoveries/90'] = df['Recoveries/90'].rank(pct=True)
 
 
-    player = st.sidebar.multiselect('Select Player', natsorted(df.Player.unique()))
+    player = st.sidebar.selectbox('Select Player', natsorted(df.Player.unique()))
 
     FW = pd.DataFrame(data=df,
                       columns=['Team', 'Player', 'Position', 'Nationality', 'NPGoals/90', 'xG/90', 'Shots/90', 'Shot%',
@@ -344,7 +345,7 @@ def AMPercentile(state):
     D = pd.DataFrame(data=df, columns=['Team', 'Player', 'Position', 'Nationality', 'Passes/90', 'Pass%', 'Dribble%',
                                        'Recoveries/90', 'TackInt/90', 'Tackle%',
                                        'AerialsWon/90', 'Aerial%', 'D2LostBalls/90'])
-    AM = AM[AM['Player'].isin(player)]
+    AM = AM[AM['Player'] == (player)]
     test = AM[AM['Player'] == player]
     test = test.drop(columns=['Team', 'Position', 'Nationality'])
     test = test.set_index('Player')
@@ -362,7 +363,7 @@ def AMPercentile(state):
     plt.title(str(player) + '\nAttacking Midfield Percentile Chart', weight='bold',size=24)
     st.pyplot(plt)
 
-    playerdf = totaldf[totaldf['Player'].isin(player)]
+    playerdf = totaldf[totaldf['Player'] == (player)]
     st.dataframe(playerdf)
 
 def DMPercentile(state):
@@ -429,7 +430,7 @@ def DMPercentile(state):
     df['Recoveries/90'] = df['Recoveries/90'].rank(pct=True)
 
 
-    player = st.sidebar.multiselect('Select Player', natsorted(df.Player.unique()))
+    player = st.sidebar.selectbox('Select Player', natsorted(df.Player.unique()))
 
     FW = pd.DataFrame(data=df,
                       columns=['Team', 'Player', 'Position', 'Nationality', 'NPGoals/90', 'xG/90', 'Shots/90', 'Shot%',
@@ -447,7 +448,7 @@ def DMPercentile(state):
     D = pd.DataFrame(data=df, columns=['Team', 'Player', 'Position', 'Nationality', 'Passes/90', 'Pass%', 'Dribble%',
                                        'Recoveries/90', 'TackInt/90', 'Tackle%',
                                        'AerialsWon/90', 'Aerial%', 'D2LostBalls/90'])
-    DM = DM[DM['Player'].isin(player)]
+    DM = DM[DM['Player'] == (player)]
     test = DM[DM['Player'] == player]
     test = test.drop(columns=['Team', 'Position', 'Nationality'])
     test = test.set_index('Player')
@@ -465,7 +466,7 @@ def DMPercentile(state):
     plt.title(str(player) + '\nDefensive Midfield Percentile Chart', weight='bold',size=24)
     st.pyplot(plt)
 
-    playerdf = totaldf[totaldf['Player'].isin(player)]
+    playerdf = totaldf[totaldf['Player'] == (player)]
     st.dataframe(playerdf)
 
 def DPercentile(state):
@@ -532,7 +533,7 @@ def DPercentile(state):
     df['Recoveries/90'] = df['Recoveries/90'].rank(pct=True)
 
 
-    player = st.sidebar.multiselect('Select Player', natsorted(df.Player.unique()))
+    player = st.sidebar.selectbox('Select Player', natsorted(df.Player.unique()))
 
     FW = pd.DataFrame(data=df,
                       columns=['Team', 'Player', 'Position', 'Nationality', 'NPGoals/90', 'xG/90', 'Shots/90', 'Shot%',
@@ -550,7 +551,7 @@ def DPercentile(state):
     D = pd.DataFrame(data=df, columns=['Team', 'Player', 'Position', 'Nationality', 'Passes/90', 'Pass%', 'Dribble%',
                                        'Recoveries/90', 'TackInt/90', 'Tackle%',
                                        'AerialsWon/90', 'Aerial%', 'D2LostBalls/90'])
-    D = D[D['Player'].isin(player)]
+    D = D[D['Player'] == (player)]
     test = D[D['Player'] == player]
     test = test.drop(columns=['Team', 'Position', 'Nationality'])
     test = test.set_index('Player')
@@ -568,7 +569,7 @@ def DPercentile(state):
     plt.title(str(player) + '\nDefenders Percentile Chart', weight='bold',size=24)
     st.pyplot(plt)
 
-    playerdf = totaldf[totaldf['Player'].isin(player)]
+    playerdf = totaldf[totaldf['Player'] == (player)]
     st.dataframe(playerdf)
 
 
