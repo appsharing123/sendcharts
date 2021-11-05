@@ -248,7 +248,7 @@ def FWPercentile(state):
     test = test.transpose()
     test.head()
 
-    ax = test.plot.barh(figsize=(32, 24))
+    ax = test.plot.barh(figsize=(20, 20))
     ax.set_xlim([0, 1])
     ax.set_xticks([0, .1, .2, .3, .4, .5, .6, .7, .8, .9, 1])
     ax.xaxis.grid(True, linestyle='--', which='major',
@@ -350,14 +350,14 @@ def AMPercentile(state):
     test = test.transpose()
     test.head()
 
-    ax = test.plot.barh(figsize=(32, 24))
+    ax = test.plot.barh(figsize=(20, 20))
     ax.set_xlim([0, 1])
     ax.set_xticks([0, .1, .2, .3, .4, .5, .6, .7, .8, .9, 1])
     ax.xaxis.grid(True, linestyle='--', which='major',
                   color='black', alpha=.5)
     ax.axvline(.5, color='red', alpha=0.5, lw=6)  # median position
     ax.set_facecolor('#E6E6E6')
-    plt.title(str(player) + '\nMidfield Percentile Chart', weight='bold',size=24)
+    plt.title(str(player) + '\nAttacking Midfield Percentile Chart', weight='bold',size=24)
     st.pyplot(plt)
 
     playerdf = totaldf[totaldf['Player'].isin(player)]
@@ -452,7 +452,7 @@ def DMPercentile(state):
     test = test.transpose()
     test.head()
 
-    ax = test.plot.barh(figsize=(32, 24))
+    ax = test.plot.barh(figsize=(20, 20))
     ax.set_xlim([0, 1])
     ax.set_xticks([0, .1, .2, .3, .4, .5, .6, .7, .8, .9, 1])
     ax.xaxis.grid(True, linestyle='--', which='major',
@@ -554,9 +554,10 @@ def DPercentile(state):
     test = test.transpose()
     test.head()
 
-    ax = test.plot.barh(figsize=(24, 16))
+    ax = test.plot.barh(figsize=(20, 20))
     ax.set_xlim([0, 1])
     ax.set_xticks([0, .1, .2, .3, .4, .5, .6, .7, .8, .9, 1])
+
     ax.xaxis.grid(True, linestyle='--', which='major',
                   color='black', alpha=.5)
     ax.axvline(.5, color='red', alpha=0.5, lw=6)  # median position
@@ -573,6 +574,6 @@ if __name__ == "__main__":
     main()
 
 #st.set_option('server.enableCORS', True)
-# to run : streamlit run "/Users/michael/Documents/Python/Codes/NCAA Comparison App.py"
+# to run : streamlit run "/Users/michael/Documents/Python/Codes/NCAA Percentile App.py"
 
 
