@@ -1,27 +1,11 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 
-import os
 from natsort import natsorted
 import streamlit as st
 import pandas as pd
-import seaborn as sns
 import matplotlib.pyplot as plt
-from matplotlib.patches import Arc
 from streamlit.hashing import _CodeHasher
-import matplotlib.font_manager as fm
-import numpy as np
-import matplotlib.cm as cm
-import matplotlib.colors as colors
-from matplotlib.colors import TwoSlopeNorm
-import matplotlib.cbook as cbook
-import matplotlib.image as image
-import matplotlib.gridspec as gridspec
-import matplotlib as mpl
-from mpl_toolkits.axes_grid1.inset_locator import inset_axes
-from matplotlib.projections import get_projection_class
-from scipy.spatial import ConvexHull
-import vaex
 
 
 
