@@ -36,7 +36,7 @@ def main():
         "Forward Percentile": FWPercentile,
         "Attacking Midfield Percentile": AMPercentile,
         "Defenisve Midfield Percentile": DMPercentile,
-        "Defense Percentile": DPercentile,
+        "CB Percentile": DPercentile,
         "FB Percentile": FBPercentile,
     }
 
@@ -566,7 +566,7 @@ def DPercentile(state):
                   color='black', alpha=.5)
     ax.axvline(.5, color='red', alpha=0.5, lw=10)  # median position
     ax.set_facecolor('#E6E6E6')
-    plt.title(str(player) + '\nDefenders Percentile Chart', weight='bold',size=24)
+    plt.title(str(player) + '\nCB Percentile Chart', weight='bold',size=24)
     st.pyplot(plt)
 
     playerdf = totaldf[totaldf['Player'] == (player)]
@@ -658,7 +658,7 @@ def FBPercentile(state):
                                        'Recoveries/90', 'TackInt/90', 'Tackle%','D2LostBalls/90',
                                         'Aerial%','CrossesComplete/90','KeyPasses/90','xA/90'])
 
-    
+
     FB = FB[FB['Player'] == (player)]
     test = FB[FB['Player'] == player]
     test = test.drop(columns=['Team', 'Position', 'Nationality'])
