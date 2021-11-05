@@ -37,6 +37,7 @@ def main():
         "Attacking Midfield Percentile": AMPercentile,
         "Defenisve Midfield Percentile": DMPercentile,
         "Defense Percentile": DPercentile,
+        "FB Percentile": FBPercentile,
     }
 
     # st.sidebar.title("Page Filters")
@@ -157,7 +158,6 @@ def _get_state(hash_funcs=None):
         session._custom_session_state = _SessionState(session, hash_funcs)
 
     return session._custom_session_state
-
 
 
 def FWPercentile(state):
@@ -572,7 +572,113 @@ def DPercentile(state):
     playerdf = totaldf[totaldf['Player'] == (player)]
     st.dataframe(playerdf)
 
+def FBPercentile(state):
+    df = load_data()
 
+    df['Per90'] = df.Minutes / 90
+    df['NPenGoals'] = df.Goals - df.Penalties
+    df['TackInt'] = df['Successful Tackles'] + df['Interceptions']
+    df['NPGoals/90'] = df.NPenGoals / df.Per90
+    df['xG/90'] = df.xG / df.Per90
+    df['xA/90'] = df.xA / df.Per90
+    df['Assist/90'] = df.Assists / df.Per90
+    df['Shots/90'] = df.Shots / df.Per90
+    df['Passes/90'] = df.Passes / df.Per90
+    df['PassesComplete/90'] = df['Passes Complete'] / df.Per90
+    df['KeyPasses/90'] = df['Key Passes'] / df.Per90
+    df['CrossesComplete/90'] = df['Crosses Complete'] / df.Per90
+    df['D2LostBalls/90'] = df['D2 Lost Balls'] / df.Per90
+    df['AerialsWon/90'] = df['Aerials Won'] / df.Per90
+    df['DribblesSuccessful/90'] = df['Dribbles Successful'] / df.Per90
+    df['TackInt/90'] = df['TackInt'] / df.Per90
+    df['TacklesWon/90'] = df['Successful Tackles'] / df.Per90
+    df['Interceptions/90'] = df.Interceptions / df.Per90
+    df['A2Recoveries/90'] = df['A2 Recoveries'] / df.Per90
+    df['Recoveries/90'] = df['Ball Recoveries'] / df.Per90
+
+    totaldf = pd.DataFrame(data=df,
+                      columns=['Team', 'Player', 'Position', 'Nationality', 'NPGoals/90', 'xG/90', 'Assist/90', 'xA/90',
+                               'Shots/90',
+                               'Shot%', 'Passes/90', 'PassesComplete/90', 'Pass%', 'KeyPasses/90', 'CrossesComplete/90',
+                               'DribblesSuccessful/90', 'Dribble%', 'D2LostBalls/90', 'AerialsWon/90', 'Aerial%', 'Tackle%',
+                               'TacklesWon/90',
+                               'Interceptions/90', 'TackInt/90', 'A2Recoveries/90', 'Recoveries/90'])
+
+    df = pd.DataFrame(data=df,
+                      columns=['Team', 'Player', 'Position', 'Nationality', 'NPGoals/90', 'xG/90', 'Assist/90', 'xA/90',
+                               'Shots/90',
+                               'Shot%', 'Passes/90', 'PassesComplete/90', 'Pass%', 'KeyPasses/90', 'CrossesComplete/90',
+                               'DribblesSuccessful/90', 'Dribble%', 'D2LostBalls/90', 'AerialsWon/90', 'Aerial%', 'Tackle%',
+                               'TacklesWon/90',
+                               'Interceptions/90', 'TackInt/90', 'A2Recoveries/90', 'Recoveries/90'])
+
+    df['NPGoals/90'] = df['NPGoals/90'].rank(pct=True)
+    df['xG/90'] = df['xG/90'].rank(pct=True)
+    df['Assist/90'] = df['Assist/90'].rank(pct=True)
+    df['xA/90'] = df['xA/90'].rank(pct=True)
+    df['Shots/90'] = df['Shots/90'].rank(pct=True)
+    df['Shot%'] = df['Shot%'].rank(pct=True)
+    df['Passes/90'] = df['Passes/90'].rank(pct=True)
+    df['PassesComplete/90'] = df['PassesComplete/90'].rank(pct=True)
+    df['Pass%'] = df['Pass%'].rank(pct=True)
+    df['KeyPasses/90'] = df['KeyPasses/90'].rank(pct=True)
+    df['CrossesComplete/90'] = df['CrossesComplete/90'].rank(pct=True)
+    df['DribblesSuccessful/90'] = df['DribblesSuccessful/90'].rank(pct=True)
+    df['D2LostBalls/90'] = df['D2LostBalls/90'].rank(pct=True)
+    df['AerialsWon/90'] = df['AerialsWon/90'].rank(pct=True)
+    df['Aerial%'] = df['Aerial%'].rank(pct=True)
+    df['Tackle%'] = df['Tackle%'].rank(pct=True)
+    df['Dribble%'] = df['Dribble%'].rank(pct=True)
+    df['TacklesWon/90'] = df['TacklesWon/90'].rank(pct=True)
+    df['Interceptions/90'] = df['Interceptions/90'].rank(pct=True)
+    df['TackInt/90'] = df['TackInt/90'].rank(pct=True)
+    df['A2Recoveries/90'] = df['A2Recoveries/90'].rank(pct=True)
+    df['Recoveries/90'] = df['Recoveries/90'].rank(pct=True)
+
+
+    player = st.sidebar.selectbox('Select Player', natsorted(df.Player.unique()))
+
+    FW = pd.DataFrame(data=df,
+                      columns=['Team', 'Player', 'Position', 'Nationality', 'NPGoals/90', 'xG/90', 'Shots/90', 'Shot%',
+                               'Assist/90', 'xA/90', 'KeyPasses/90',
+                               'CrossesComplete/90', 'Pass%', 'DribblesSuccessful/90', 'A2Recoveries/90', 'Aerial%'])
+    AM = pd.DataFrame(data=df, columns=['Team', 'Player', 'Position', 'Nationality', 'NPGoals/90', 'xG/90', 'Shots/90',
+                                       'Assist/90', 'xA/90', 'Passes/90', 'KeyPasses/90',
+                                       'Pass%', 'DribblesSuccessful/90', 'Dribble%', 'A2Recoveries/90', 'Aerial%', 'Tackle%',
+                                       'TackInt/90'])
+    DM = pd.DataFrame(data=df, columns=['Team', 'Player', 'Position', 'Nationality',
+                                       'Passes/90','PassesComplete/90', 'KeyPasses/90',
+                                       'Pass%', 'DribblesSuccessful/90', 'Dribble%', 'A2Recoveries/90', 'Aerial%', 'Tackle%',
+                                       'TackInt/90'])
+
+    D = pd.DataFrame(data=df, columns=['Team', 'Player', 'Position', 'Nationality', 'Passes/90', 'Pass%', 'Dribble%',
+                                       'Recoveries/90', 'TackInt/90', 'Tackle%',
+                                       'AerialsWon/90', 'Aerial%', 'D2LostBalls/90'])
+    FB = pd.DataFrame(data=df, columns=['Team', 'Player', 'Position', 'Nationality', 'Passes/90', 'Pass%', 'Dribble%',
+                                       'Recoveries/90', 'TackInt/90', 'Tackle%','D2LostBalls/90',
+                                        'Aerial%','CrossesComplete/90','KeyPasses/90','xA/90'])
+
+    
+    FB = FB[FB['Player'] == (player)]
+    test = FB[FB['Player'] == player]
+    test = test.drop(columns=['Team', 'Position', 'Nationality'])
+    test = test.set_index('Player')
+    test = test.transpose()
+    test.head()
+
+    ax = test.plot.barh(figsize=(24, 20))
+    ax.set_xlim([0, 1])
+    ax.set_xticks([0, .1, .2, .3, .4, .5, .6, .7, .8, .9, 1])
+    ax.tick_params(axis='both', which='major', labelsize=18)
+    ax.xaxis.grid(True, linestyle='--', which='major',
+                  color='black', alpha=.5)
+    ax.axvline(.5, color='red', alpha=0.5, lw=10)  # median position
+    ax.set_facecolor('#E6E6E6')
+    plt.title(str(player) + '\nFB Percentile Chart', weight='bold',size=24)
+    st.pyplot(plt)
+
+    playerdf = totaldf[totaldf['Player'] == (player)]
+    st.dataframe(playerdf)
 
 if __name__ == "__main__":
     main()
