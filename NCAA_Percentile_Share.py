@@ -248,12 +248,13 @@ def FWPercentile(state):
     test = test.transpose()
     test.head()
 
-    ax = test.plot.barh(figsize=(20, 20))
+    ax = test.plot.barh(figsize=(24, 20))
     ax.set_xlim([0, 1])
     ax.set_xticks([0, .1, .2, .3, .4, .5, .6, .7, .8, .9, 1])
+    ax.tick_params(axis='both', which='major', labelsize=18)
     ax.xaxis.grid(True, linestyle='--', which='major',
                   color='black', alpha=.5)
-    ax.axvline(.5, color='red', alpha=0.5, lw=6)  # median position
+    ax.axvline(.5, color='red', alpha=0.5, lw=10)  # median position
     ax.set_facecolor('#E6E6E6')
     plt.title(str(player) + '\nForwards Percentile Chart', weight='bold',size=24)
     st.pyplot(plt)
@@ -350,12 +351,13 @@ def AMPercentile(state):
     test = test.transpose()
     test.head()
 
-    ax = test.plot.barh(figsize=(20, 20))
+    ax = test.plot.barh(figsize=(24, 20))
     ax.set_xlim([0, 1])
     ax.set_xticks([0, .1, .2, .3, .4, .5, .6, .7, .8, .9, 1])
+    ax.tick_params(axis='both', which='major', labelsize=18)
     ax.xaxis.grid(True, linestyle='--', which='major',
                   color='black', alpha=.5)
-    ax.axvline(.5, color='red', alpha=0.5, lw=6)  # median position
+    ax.axvline(.5, color='red', alpha=0.5, lw=10)  # median position
     ax.set_facecolor('#E6E6E6')
     plt.title(str(player) + '\nAttacking Midfield Percentile Chart', weight='bold',size=24)
     st.pyplot(plt)
@@ -452,12 +454,13 @@ def DMPercentile(state):
     test = test.transpose()
     test.head()
 
-    ax = test.plot.barh(figsize=(20, 20))
+    ax = test.plot.barh(figsize=(24, 20))
     ax.set_xlim([0, 1])
     ax.set_xticks([0, .1, .2, .3, .4, .5, .6, .7, .8, .9, 1])
+    ax.tick_params(axis='both', which='major', labelsize=18)
     ax.xaxis.grid(True, linestyle='--', which='major',
                   color='black', alpha=.5)
-    ax.axvline(.5, color='red', alpha=0.5, lw=6)  # median position
+    ax.axvline(.5, color='red', alpha=0.5, lw=10)  # median position
     ax.set_facecolor('#E6E6E6')
     plt.title(str(player) + '\nDefensive Midfield Percentile Chart', weight='bold',size=24)
     st.pyplot(plt)
@@ -554,15 +557,15 @@ def DPercentile(state):
     test = test.transpose()
     test.head()
 
-    ax = test.plot.barh(figsize=(20, 20))
+    ax = test.plot.barh(figsize=(24, 20))
     ax.set_xlim([0, 1])
     ax.set_xticks([0, .1, .2, .3, .4, .5, .6, .7, .8, .9, 1])
-
+    ax.tick_params(axis='both', which='major', labelsize=18)
     ax.xaxis.grid(True, linestyle='--', which='major',
                   color='black', alpha=.5)
-    ax.axvline(.5, color='red', alpha=0.5, lw=6)  # median position
+    ax.axvline(.5, color='red', alpha=0.5, lw=10)  # median position
     ax.set_facecolor('#E6E6E6')
-    plt.title(str(player) + '\nForwards Percentile Chart', weight='bold',size=24)
+    plt.title(str(player) + '\nDefenders Percentile Chart', weight='bold',size=24)
     st.pyplot(plt)
 
     playerdf = totaldf[totaldf['Player'].isin(player)]
